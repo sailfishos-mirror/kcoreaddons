@@ -28,7 +28,7 @@ class QElapsedTimer;
 class KCOREADDONS_EXPORT KJobPrivate
 {
 public:
-    KJobPrivate();
+    KJobPrivate(std::unique_ptr<QEventLoopLocker> &&locker);
     virtual ~KJobPrivate();
 
     void speedTimeout();
@@ -56,7 +56,9 @@ public:
     QEventLoop *eventLoop = nullptr;
     // eventLoopLocker prevents QCoreApplication from exiting when the last
     // window is closed until the job has finished running
-    QEventLoopLocker eventLoopLocker;
+    // This is deprecated.
+    // TODO KF7 remove
+    std::unique_ptr<QEventLoopLocker> eventLoopLocker;
     KJob::Capabilities capabilities = KJob::NoCapabilities;
     bool suspended = false;
     bool isAutoDelete = true;
