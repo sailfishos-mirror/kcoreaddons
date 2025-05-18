@@ -10,7 +10,6 @@
 
 #include <QDebug>
 #include <QFile>
-#include <dirent.h>
 
 #include <QFileInfo>
 #include <windows.h>
